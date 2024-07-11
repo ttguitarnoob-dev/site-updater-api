@@ -6,6 +6,11 @@ app = Flask(__name__)
 
 # Define a route and a view function
 directory = '/home'
+
+@app.route('/')
+def bash_script():
+    print('omg')
+
 @app.route('/scan-folders')
 def list_folders():
     folders = []
