@@ -1,12 +1,19 @@
 from flask import Flask
+import os
 
 # Create a Flask application
 app = Flask(__name__)
 
 # Define a route and a view function
-@app.route('/')
-def hello():
-    return 'Hello, World!'
+directory = '/home'
+@app.route('/scan-folders')
+def list_folders():
+    folders = []
+    for item in os.listdir(directory):
+        item_path = os.path.join(directory, item)
+        if os.path.isdir(item_path):
+            folders.append(item)
+    return folders
 
 # Run the application
 if __name__ == '__main__':
