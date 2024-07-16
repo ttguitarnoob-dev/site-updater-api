@@ -1,5 +1,6 @@
 from flask import Flask
 import os
+import subprocess
 
 # Create a Flask application
 app = Flask(__name__)
@@ -10,6 +11,7 @@ directory = '/home'
 @app.route('/')
 def bash_script():
     print('omg')
+    return 'omg'
 
 @app.route('/scan-folders')
 def list_folders():
@@ -22,7 +24,16 @@ def list_folders():
 
 @app.route('/update-app/<id>')
 def update_app(id):
+    update_script = 'update-site.sh'
+
+    # Run the updater script
+    try:
+        subprocess.run(['bash', update_script], check=True)
+    except subprocess.CalledProcessError as error:
+        print(f"Something terrible happened when running the updater script: {error}")
+
     return id
+    
 
 
 # Run the application
