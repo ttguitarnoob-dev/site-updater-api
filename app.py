@@ -1,17 +1,21 @@
 from flask import Flask
+from flask_cors import CORS
 import os
 import subprocess
 
 # Create a Flask application
 app = Flask(__name__)
+CORS(app)
 
 # Define a route and a view function
-directory = '/home'
+directory = '/home/travis/Documents/coding-projects'
 
 @app.route('/')
 def bash_script():
     print('omg')
-    return 'omg'
+    return [
+        {'thingone': 'wow'}
+    ]
 
 @app.route('/scan-folders')
 def list_folders():
@@ -28,10 +32,10 @@ def update_app(id):
 
     # Run the updater script
     try:
-        subprocess.run(['bash', update_script], check=True)
+        subprocess.run(['bash', update_script, id], check=True)
     except subprocess.CalledProcessError as error:
         print(f"Something terrible happened when running the updater script: {error}")
-
+    print(id)
     return id
     
 
