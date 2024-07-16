@@ -8,7 +8,8 @@ app = Flask(__name__)
 CORS(app)
 
 # Define a route and a view function
-directory = '/home/travis/Documents/coding-projects'
+# directory = '/home/travis/Documents/coding-projects'
+directory = '/home'
 
 @app.route('/')
 def bash_script():
@@ -35,7 +36,6 @@ def update_app(id):
         subprocess.run(['bash', update_script, id], check=True)
     except subprocess.CalledProcessError as error:
         print(f"Something terrible happened when running the updater script: {error}")
-    print(id)
     return id
     
 
