@@ -20,6 +20,11 @@ def list_folders():
             folders.append(item)
     return folders
 
+@app.route('/update-app/<id>')
+def update_app(id):
+    return id
+
+
 # Run the application
 if __name__ == '__main__':
     app.run(debug=True)
