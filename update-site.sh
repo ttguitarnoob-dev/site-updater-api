@@ -1,6 +1,6 @@
 #!/bin/bash
 
-path="/home/travis/Documents/coding-projects/$1"
+path="/home/$1"
 
 echo "Updating $1"
 
