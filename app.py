@@ -3,11 +3,9 @@ from flask_cors import CORS
 import os
 import subprocess
 
-# Create a Flask application
 app = Flask(__name__)
 CORS(app)
 
-# Define a route and a view function
 # directory = '/home/travis/Documents/coding-projects'
 directory = '/home'
 
