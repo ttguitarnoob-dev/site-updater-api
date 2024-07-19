@@ -1,9 +1,12 @@
 from flask import Flask
 from flask_cors import CORS
+from flask_socketio import SocketIO, emit
 import os
 import subprocess
+import threading
 
 app = Flask(__name__)
+socketio = SocketIO(app, cors_allowed_origins = "*")
 CORS(app)
 
 # directory = '/home/travis/Documents/coding-projects'
@@ -35,9 +38,24 @@ def update_app(id):
     except subprocess.CalledProcessError as error:
         print(f"Something terrible happened when running the updater script: {error}")
     return id
+
+@app.route('/assupdate', methods=['POST'])
+def assupdate():
+    def run_script():
+        process = subprocess.Popen(['./update-site.sh'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+        for line in iter(process.stdout.readline, b''):
+            print('linnne', line)
+            socketio.emit('update', {'data': line.decode('utf-8')})
+        process.stdout.close()
+        process.wait()
+        socketio.emit('update', {'data': 'Script finished pooass'})
+
+    thread = threading.Thread(target=run_script)
+    thread.start()
+    return 'Script started', 200
     
 
 
 # Run the application
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    socketio.run(app, host='0.0.0.0', port=5000, debug=False)
