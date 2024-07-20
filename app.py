@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 import os
@@ -41,8 +41,11 @@ def update_app(id):
 
 @app.route('/assupdate', methods=['POST'])
 def assupdate():
+    #argument, which button was clicked on the frontent. Frontent needs to send json data like {'argument': button_clicked}
+    # argument = request.get_json()
+    # print('GOMGOMGOMGOMGOMGOMGOMGOMGOMGOMGOMGOMGOMG', argument)
     def run_script():
-        process = subprocess.Popen(['./update-site.sh'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+        process = subprocess.Popen(['./update-site.sh', "STINKASS"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False)
         for line in iter(process.stdout.readline, b''):
             print('linnne', line)
             socketio.emit('update', {'data': line.decode('utf-8')})

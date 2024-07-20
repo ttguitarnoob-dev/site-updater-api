@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "did it worked"
+echo "the button clicked is $1"
 
 # path="/home/$1"
 
