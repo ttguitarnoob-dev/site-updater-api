@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 import os
@@ -55,7 +55,7 @@ def assupdate():
 
     thread = threading.Thread(target=run_script)
     thread.start()
-    return 'Script started', 200
+    return jsonify({"status", 200})
     
 
 
