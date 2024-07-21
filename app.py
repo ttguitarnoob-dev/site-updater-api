@@ -42,8 +42,8 @@ def update_app(id):
 @app.route('/assupdate', methods=['POST'])
 def assupdate():
     #argument, which button was clicked on the frontent. Frontent needs to send json data like {'argument': button_clicked}
-    # argument = request.get_json()
-    # print('GOMGOMGOMGOMGOMGOMGOMGOMGOMGOMGOMGOMGOMG', argument)
+    argument = request.get_json()
+    print('GOMGOMGOMGOMGOMGOMGOMGOMGOMGOMGOMGOMGOMG', argument)
     def run_script():
         process = subprocess.Popen(['./update-site.sh', "STINKASS"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False)
         for line in iter(process.stdout.readline, b''):
