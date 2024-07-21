@@ -43,9 +43,9 @@ def update_app(id):
 def assupdate():
     #argument, which button was clicked on the frontent. Frontent needs to send json data like {'argument': button_clicked}
     argument = request.get_json()
-    print('GOMGOMGOMGOMGOMGOMGOMGOMGOMGOMGOMGOMGOMG', argument)
+    print('GOMGOMGOMGOMGOMGOMGOMGOMGOMGOMGOMGOMGOMG', argument['smell'])
     def run_script():
-        process = subprocess.Popen(['./update-site.sh', "STINKASS"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False)
+        process = subprocess.Popen(['./update-site.sh', argument['smell']], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False)
         for line in iter(process.stdout.readline, b''):
             print('linnne', line)
             socketio.emit('update', {'data': line.decode('utf-8')})
