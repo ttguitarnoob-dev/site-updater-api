@@ -55,7 +55,8 @@ def assupdate():
 
     thread = threading.Thread(target=run_script)
     thread.start()
-    return jsonify({"status": 200})
+    # return jsonify({"status": 200})
+    return
     
 
 
