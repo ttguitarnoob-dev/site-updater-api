@@ -52,11 +52,11 @@ def assupdate():
         process.stdout.close()
         process.wait()
         socketio.emit('update', {'data': 'Script finished pooass'})
-        return jsonify({"statussss": 200})
+        return
     thread = threading.Thread(target=run_script)
     thread.start()
     # return jsonify({"status": 200})
-    return argument
+    return 
     
 
 
